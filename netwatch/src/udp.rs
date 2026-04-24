@@ -746,6 +746,11 @@ impl SocketState {
             socket.set_only_v6(true)?;
         }
 
+        #[cfg(unix)]
+        if let Err(err) = socket.set_reuse_address(true) {
+            warn!("failed to set SO_REUSEADDR: {:?}", err);
+        }
+
         // Binding must happen before calling noq, otherwise `local_addr`
         // is not yet available on all OSes.
         socket.bind(&addr.into())?;

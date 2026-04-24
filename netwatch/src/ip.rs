@@ -91,7 +91,7 @@ impl LocalAddresses {
             regular6 = ula6;
         }
         let mut regular = regular4;
-        
+
         regular.extend(linklocal4.into_iter().chain(regular6));
 
         regular.sort();
